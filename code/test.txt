@@ -1,0 +1,117 @@
+En premier lieu on rentre la commande suivante :
+                   
+                   [projet].
+
+
+/* TEST AUTOREF */
+---> Pour autoref, on dois decommenter la ligne 20 : "% equiv(sculpture,and(objet,all(cree_par,sculpteur)))."
+autoref(personne,personne).
+autoref(sculpture,sculpteur).
+autoref(auteur,sculpteur).
+
+/* TEST CONCEPT */
+concept(and(personne,all(aCree,sculpteur))).
+concept(and(personne,all(personne,sculpteur))).
+
+/* TEST INSTANCE */
+instance(michelAnge).
+
+/* TEST REMPLACE */
+remplace(auteur,X).
+remplace(personne,X).
+remplace(and(personne,all(aCree,or(editeur,objet))),X).
+
+/* TEST ACQUISITION _PROP_TYPE1 */
+---> Pour teste que cette partie, on doit mettre en commentaire troisieme_etape dans le predicat programme et lancer programme.
+---> ensuite on appuie sur 1. et pour I et C on met ca :
+michelAnge.
+personne.
+
+/* TEST ACQUISITION _PROP_TYPE2 */
+---> Pour teste que cette partie, on doit mettre en commentaire troisieme_etape dans le predicat programme et lancer programme.
+---> ensuite on appuie sur 2. et pour C1 et C2 on met ca :
+livre.
+objet.
+
+/* TEST TRI_ABOX */
+tri_Abox([(david,sculpture),(david,not(sculpture)),(michelAnge,some(aCree,personne)),(vinci,all(aCree,livre)),(david,and(sculpture,personne)),(david,or(sculpture,personne))],Lie,Lpt,Li,Lu,Ls).
+
+/* TEST CLASH */
+clash([(david,sculpture),(david,not(sculpture))]).
+clash([(david,sculpture),(vinci,not(sculpture))]).
+clash([(david,sculpture),(inst1,not(sculpture))]).
+
+/* TEST EVOLUE */
+evolue((david,sculpture),Lie,Lpt,Li,Lu,Ls,Lie,Lpt,Li,Lu,Ls).
+evolue((david,and(sculpture,livre)),Lie,Lpt,Li,Lu,Ls,Lie,Lpt,Li,Lu,Ls).
+
+/* TEST COMPLETE_SOME */
+---> Pour réaliser les tests, on met en commentaire la résolution, car on veut que le programme s'arrête juste après le clash, 
+---> et enfin on a remplacé genere(B) par une instance nommée inst directement. 
+complete_some([(david,some(aCree,not(personne)))],[],[],[],[(michelAnge,personne)],[]).
+complete_some([(david,some(aCree,not(personne)))],[],[],[],[(michelAnge,sculpture)],[]).
+
+/* TEST TRANSFORMATION_AND */
+---> Pour réaliser les tests, on met en commentaire la résolution, car on veut que le programme s'arrête juste après le clash.
+transformation_and([],[],[(david,and(personne,not(sculpture)))],[],[(david,sculpture)],[]).
+transformation_and([],[],[(david,and(personne,livre))],[],[(david,sculpture)],[]).
+
+/* TEST DEDUCTION_ALL */
+---> Pour réaliser les tests, on met en commentaire la résolution, car on veut que le programme s'arrête juste après le clash.
+deduction_all([],[(david,all(aCree,not(personne)))],[],[],[(michelAnge,personne)],[(david,michelAnge,aCree)]).
+deduction_all([],[(david,all(aCree,not(personne)))],[],[],[(michelAnge,personne)],[(david,michelAnge,aEcrit)]).
+deduction_all([],[(david,all(aCree,not(personne)))],[],[],[(michelAnge,sculpture)],[(david,michelAnge,aCree)]).
+
+/* TEST TRANSFORMATION_OR */
+---> Pour réaliser les tests, on met en commentaire la résolution, car on veut que le programme s'arrête juste après le clash.
+transformation_or([],[],[],[(david,or(sculpteur,not(personne)))],[(david,personne),(david,not(sculpteur))],[]).
+transformation_or([],[],[],[(david,or(sculpteur,not(personne)))],[(michelAnge,personne)],[]).
+transformation_or([],[],[],[(david,or(sculpteur,not(personne)))],[(david,personne)],[]).
+
+/* TEST AFFICHE_EVOLUTION_ABOX */
+---> on lance programme. et ensuite on appuie sur 1. puis pour I et C on met ca :
+david.
+or(sculpture,personne).
+
+
+/*\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\ */
+/* \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \*/
+/*  \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /*TEST PROGRAMME*/ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\    /\ */
+/* \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \  /  \*/
+/*  \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \/    \*/
+
+/*TEST 1*/
+---> on lance programme. et ensuite on appuie sur 1. puis pour I et C on met ca :
+david.
+or(not(sculpture),personne).
+
+/*TEST 2*/
+---> on lance programme. et ensuite on appuie sur 1. puis pour I et C on met ca :
+michelAnge.
+auteur.
+
+/*TEST 3*/
+---> on lance programme. et ensuite on appuie sur 1. puis pour I et C on met ca :
+michelAnge.
+sculpteur.
+
+-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-
+
+/*TEST 4*/
+---> on lance programme. et ensuite on appuie sur 2. puis pour I et C on met ca :
+objet.
+livre.
+
+/*TEST 5*/
+---> on lance programme. et ensuite on appuie sur 2. puis pour I et C on met ca :
+livre.
+auteur.
+
+/*TEST 6*/
+---> on lance programme. et ensuite on appuie sur 2. puis pour I et C on met ca :
+personne.
+livre.
